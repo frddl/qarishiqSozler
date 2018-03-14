@@ -40,6 +40,6 @@ import { IonDigitKeyboard } from '../components/ion-digit-keyboard/ion-digit-key
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
-  ]
+  ] 
 })
 export class AppModule {}
