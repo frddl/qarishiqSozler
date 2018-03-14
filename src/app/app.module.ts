@@ -11,6 +11,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { WelcomePage } from '../pages/welcome/welcome';
+import { IonDigitKeyboard } from '../components/ion-digit-keyboard/ion-digit-keyboard.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { WelcomePage } from '../pages/welcome/welcome';
   ],
   imports: [
     BrowserModule,
+    IonDigitKeyboard,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

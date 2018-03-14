@@ -22,4 +22,9 @@ export class WelcomePage {
     console.log('ionViewDidLoad WelcomePage');
   }
 
+  onKeyboardButtonClick(key: number) {
+    // Log the pressed key
+    console.log(key);
+  }
+
 }

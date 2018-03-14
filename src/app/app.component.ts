@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { WelcomePage } from '../pages/welcome/welcome';
+import { IonDigitKeyboardCmp } from '../components/ion-digit-keyboard';
 
 @Component({
   templateUrl: 'app.html'
