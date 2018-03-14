@@ -1,13 +1,8 @@
 import { Component, ViewChild, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { IonDigitKeyboardCmp, IonDigitKeyboardOptions } from '../../components/ion-digit-keyboard';
-
-/**
- * Generated class for the WelcomePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { ToastController } from 'ionic-angular';
+import { Http, Headers, RequestOptions } from '@angular/http';
 
 @IonicPage()
 @Component({
@@ -16,7 +11,10 @@ import { IonDigitKeyboardCmp, IonDigitKeyboardOptions } from '../../components/i
 })
 export class WelcomePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  myNumber = "";
+  smsCode = "";
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, private http: Http) {
   }
 
   @ViewChild(IonDigitKeyboardCmp) keyboard;
@@ -42,15 +40,59 @@ export class WelcomePage {
   }
 
   enterNumber(key: number) {
-    document.getElementsByName('mobileNumber')[0].innerText += key;
     
+    let f = document.getElementsByName('mobileNumber')[0].innerText;
+    if (f.length <= 10) document.getElementsByName('mobileNumber')[0].innerText += key;
+    this.myNumber += key;
   }
 
   removeNumber(){
-
+    let f = document.getElementsByName('mobileNumber')[0].innerText;
+    document.getElementsByName('mobileNumber')[0].innerText = (f.substring(0, f.length - 1));
+    this.myNumber = this.myNumber.substring(0, this.myNumber.length - 1);
   }
 
   validateNumber(){
+    let n = this.myNumber;
+    let numberFormatFlag = n.substr(0, 3) == '050' || n.substr(0, 3) == '051' || n.substr(0, 3) == '055' || n.substr(0, 3) == '070' || n.substr(0, 3) == '077';
+    let numberLengthFlag = n.length == 10;
 
+    if (!(numberFormatFlag && numberLengthFlag)){
+      this.presentToast();
+    } else {
+      var headers = new Headers();
+      headers.append("Accept", 'application/json');
+      headers.append('Content-Type', 'application/json' );
+      let options = new RequestOptions({ headers: headers });
+
+      let body = {
+        "token" : "appqs-47421358-fb3f-4596-a259-d2bf7d925718",
+        "action" : "smscode",
+        "msisdn" : "994" + n.substr(1)
+      };
+
+      this.http.post('/api/', body, options)
+      .subscribe(data => {
+        let obj = JSON.parse(data.text());
+        console.log(obj.results.smscode);
+        this.smsCode = obj.results.smscode;
+      }, error => {
+        console.log(error.status);
+      });
+    }
+  }
+
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Mobil nömrə düzgün daxil edilməyib',
+      duration: 1500,
+      position: 'bottom'
+    });
+  
+    toast.onDidDismiss(() => {
+      // do nothing
+    });
+  
+    toast.present();
   }
 }
