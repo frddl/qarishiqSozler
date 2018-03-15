@@ -16,6 +16,7 @@ export class WelcomePage {
   smsCode = "";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, private http: Http) {
+  
   }
 
   @ViewChild(IonDigitKeyboardCmp) keyboard;
