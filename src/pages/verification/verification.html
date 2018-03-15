@@ -14,5 +14,21 @@
 
 
 <ion-content padding>
-  <p>{{this.verificationCode}}</p>
+  <p>{{verificationCode}}</p>
 </ion-content>
+
+<ion-digit-keyboard
+    [align]="keyboardSettings.align"
+    [width]="keyboardSettings.width"
+    [visible]="keyboardSettings.visible"
+    [leftActionOptions]="keyboardSettings.leftActionOptions"
+    [rightActionOptions]="keyboardSettings.rightActionOptions"
+    [roundButtons]="keyboardSettings.roundButtons"
+    [showLetters]="keyboardSettings.showLetters"
+    [swipeToHide]="keyboardSettings.swipeToHide"
+    [theme]="keyboardSettings.theme"
+    (numberClick)="enterNumber($event)"
+    (rightActionClick)="removeNumber()"
+>
+
+</ion-digit-keyboard>

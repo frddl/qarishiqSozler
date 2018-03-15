@@ -10,4 +10,5 @@ import { VerificationPage } from './verification';
     IonicPageModule.forChild(VerificationPage),
   ],
 })
+
 export class VerificationPageModule {}

@@ -70,11 +70,11 @@ export class WelcomePage {
       this.http.post('/api/', body, options)
       .subscribe(data => {
         let obj = JSON.parse(data.text());
-        console.log(obj.results.smscode);
+        // console.log(obj.results.smscode);
         this.smsCode = obj.results.smscode;
         this.navCtrl.push(VerificationPage, {
           mobileNumber : this.myNumber,
-          validationCode : this.smsCode 
+          verificationCode : this.smsCode 
         });
 
       }, error => {
