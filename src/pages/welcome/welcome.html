@@ -6,8 +6,8 @@
 -->
 
 
-<ion-content padding text-center>
-  <img style="padding: 10% 0% 10% 0%" src="../../assets/imgs/welcome.png">
+<ion-content no-bounce padding text-center>
+  <!-- <img style="padding: 10% 0% 10% 0%" src="../../assets/imgs/welcome.png"> -->
 
   <p>Davam etmək üçün mobil nömrənizi daxil edin</p>
   
@@ -30,9 +30,10 @@
     (numberClick)="enterNumber($event)"
     (rightActionClick)="removeNumber()"
 >
-<ion-toolbar no-border-bottom>
-    <ion-buttons end>
-        <button ion-button solid ng-click="validateNumber()">Davam et</button>
-    </ion-buttons>
-</ion-toolbar>
+
+  <ion-toolbar no-border-bottom>
+      <ion-buttons end>
+          <button ion-button solid onClick="validateNumber()">Davam et</button>
+      </ion-buttons>
+  </ion-toolbar>
 </ion-digit-keyboard>
