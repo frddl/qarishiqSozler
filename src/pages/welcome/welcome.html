@@ -28,7 +28,11 @@
     [swipeToHide]="keyboardSettings.swipeToHide"
     [theme]="keyboardSettings.theme"
     (numberClick)="enterNumber($event)"
-    (leftActionClick)="removeNumber()"
-    (rightActionClick)="validateNumber()"
+    (rightActionClick)="removeNumber()"
 >
+<ion-toolbar no-border-bottom>
+    <ion-buttons end>
+        <button ion-button solid ng-click="validateNumber()">Davam et</button>
+    </ion-buttons>
+</ion-toolbar>
 </ion-digit-keyboard>

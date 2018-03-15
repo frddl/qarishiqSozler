@@ -24,13 +24,13 @@ export class WelcomePage {
     visible: true,
 
     leftActionOptions: {
-        iconName: 'md-backspace',
-        fontSize: '1em'
+        // iconName: 'md-backspace',
+        // fontSize: '1em'
     },
 
     rightActionOptions: {
-        iconName: 'md-checkmark-circle-outline',
-        fontSize: '1em'
+      iconName: 'md-backspace',
+      fontSize: '1em'
     },
 
     roundButtons: false,
@@ -76,6 +76,7 @@ export class WelcomePage {
         let obj = JSON.parse(data.text());
         console.log(obj.results.smscode);
         this.smsCode = obj.results.smscode;
+
       }, error => {
         console.log(error.status);
       });
