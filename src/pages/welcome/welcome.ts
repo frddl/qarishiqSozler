@@ -1,8 +1,9 @@
-import { Component, ViewChild, Input } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { IonDigitKeyboardCmp, IonDigitKeyboardOptions } from '../../components/ion-digit-keyboard';
 import { ToastController } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { VerificationPage } from '../verification/verification';
 
 @IonicPage()
 @Component({
@@ -35,9 +36,8 @@ export class WelcomePage {
   }
 
   enterNumber(key: number) {
-    
     let f = document.getElementsByName('mobileNumber')[0].innerText;
-    if (f.length <= 10) document.getElementsByName('mobileNumber')[0].innerText += key;
+    if (f.length < 10) document.getElementsByName('mobileNumber')[0].innerText += key;
     this.myNumber += key;
   }
 
@@ -71,6 +71,10 @@ export class WelcomePage {
         let obj = JSON.parse(data.text());
         console.log(obj.results.smscode);
         this.smsCode = obj.results.smscode;
+        this.navCtrl.push(VerificationPage, {
+          mobileNumber : this.myNumber,
+          validationCode : this.smsCode 
+        });
 
       }, error => {
         console.log(error.status);

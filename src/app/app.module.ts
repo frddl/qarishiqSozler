@@ -6,6 +6,7 @@ import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { WelcomePage } from '../pages/welcome/welcome';
+import { VerificationPage } from '../pages/verification/verification';
 import { IonDigitKeyboard } from '../components/ion-digit-keyboard/ion-digit-keyboard.module';
 
 import { HttpModule } from '@angular/http';
@@ -13,7 +14,8 @@ import { HttpModule } from '@angular/http';
 @NgModule({
   declarations: [
     MyApp,
-    WelcomePage
+    WelcomePage,
+    VerificationPage
   ],
   imports: [
     BrowserModule,
@@ -24,7 +26,8 @@ import { HttpModule } from '@angular/http';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    WelcomePage
+    WelcomePage,
+    VerificationPage
   ],
   providers: [
     StatusBar,

@@ -5,19 +5,19 @@
   Ionic pages and navigation.
 -->
 
+<img style="width: 110% !important; padding: 0% 0% 0% 0%" src="../../assets/imgs/welcomeLogo.png">
 
-<ion-content no-bounce padding text-center>
-  <!-- <img style="padding: 10% 0% 10% 0%" src="../../assets/imgs/welcome.png"> -->
-
+<ion-content padding="false" no-bounce text-center>
+  
   <div class="welcomeBlock">
     <p>Davam etmək üçün mobil nömrənizi daxil edin</p>
     
     <ion-item class="item-centered">
-      <ion-input type="number" maxlength="10" name="mobileNumber" focused placeholder="məs: 0551234567" style="text-align: center"></ion-input>
+      <ion-input disabled type="number" name="mobileNumber" focused placeholder="məs: 0551234567" style="text-align: center"></ion-input>
     </ion-item>
   </div>
   
-  <button ion-button outline block color="dark" (click)="validateNumber()">Davam et</button>
+  <button ion-button outline block color="dark" (click)="validateNumber()" [navPush]="verificationPage">Davam et</button>
 
 </ion-content>
 
