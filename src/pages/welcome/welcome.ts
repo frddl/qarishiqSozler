@@ -23,11 +23,6 @@ export class WelcomePage {
     width: '100%',
     visible: true,
 
-    leftActionOptions: {
-        // iconName: 'md-backspace',
-        // fontSize: '1em'
-    },
-
     rightActionOptions: {
       iconName: 'md-backspace',
       fontSize: '1em'
@@ -52,7 +47,7 @@ export class WelcomePage {
     this.myNumber = this.myNumber.substring(0, this.myNumber.length - 1);
   }
 
-  validateNumber(){
+  public validateNumber(){
     let n = this.myNumber;
     let numberFormatFlag = n.substr(0, 3) == '050' || n.substr(0, 3) == '051' || n.substr(0, 3) == '055' || n.substr(0, 3) == '070' || n.substr(0, 3) == '077';
     let numberLengthFlag = n.length == 10;

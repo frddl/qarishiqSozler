@@ -9,12 +9,16 @@
 <ion-content no-bounce padding text-center>
   <!-- <img style="padding: 10% 0% 10% 0%" src="../../assets/imgs/welcome.png"> -->
 
-  <p>Davam etmək üçün mobil nömrənizi daxil edin</p>
+  <div class="welcomeBlock">
+    <p>Davam etmək üçün mobil nömrənizi daxil edin</p>
+    
+    <ion-item class="item-centered">
+      <ion-input type="number" maxlength="10" name="mobileNumber" focused placeholder="məs: 0551234567" style="text-align: center"></ion-input>
+    </ion-item>
+  </div>
   
-  <ion-item class="item-centered"></ion-item>
-  <ion-item class="item-centered" style="padding-bottom: 50% !important">
-    <ion-input type="number" maxlength="10" name="mobileNumber" placeholder="məs: 0551234567" style="text-align: center"></ion-input>
-  </ion-item>
+  <button ion-button outline block color="dark" (click)="validateNumber()">Davam et</button>
+
 </ion-content>
 
 <ion-digit-keyboard
@@ -31,9 +35,4 @@
     (rightActionClick)="removeNumber()"
 >
 
-  <ion-toolbar no-border-bottom>
-      <ion-buttons end>
-          <button ion-button solid onClick="validateNumber()">Davam et</button>
-      </ion-buttons>
-  </ion-toolbar>
 </ion-digit-keyboard>
