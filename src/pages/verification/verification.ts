@@ -3,18 +3,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { IonDigitKeyboardCmp, IonDigitKeyboardOptions } from '../../components/ion-digit-keyboard';
 import { ToastController } from 'ionic-angular';
 
-/**
- * Generated class for the VerificationPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-verification',
   templateUrl: 'verification.html',
 })
+
 export class VerificationPage {
 
   mobileNumber: string;
@@ -56,6 +50,4 @@ export class VerificationPage {
     document.getElementsByName('mobileNumber')[0].innerText = (f.substring(0, f.length - 1));
     this.code = this.code.substring(0, this.code.length - 1);
   }
-
-
 }
