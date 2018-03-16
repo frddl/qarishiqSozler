@@ -4,6 +4,7 @@ import { IonDigitKeyboardCmp, IonDigitKeyboardOptions } from '../../components/i
 import { ToastController } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { VerificationPage } from '../verification/verification';
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -14,9 +15,10 @@ export class WelcomePage {
 
   myNumber = "";
   smsCode = "";
+  username;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, private http: Http) {
-  
+  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, private http: Http, private storage : Storage) {
+    storage.clear();
   }
 
   @ViewChild(IonDigitKeyboardCmp) keyboard;
@@ -38,8 +40,10 @@ export class WelcomePage {
 
   enterNumber(key: number) {
     let f = document.getElementsByName('mobileNumber')[0].innerText;
-    if (f.length < 10) document.getElementsByName('mobileNumber')[0].innerText += key;
-    this.myNumber += key;
+    if (f.length < 10) {
+      document.getElementsByName('mobileNumber')[0].innerText += key;
+      this.myNumber += key;
+    }
   }
 
   removeNumber(){
@@ -52,7 +56,7 @@ export class WelcomePage {
     let n = this.myNumber;
     let numberFormatFlag = n.substr(0, 3) == '050' || n.substr(0, 3) == '051' || n.substr(0, 3) == '055' || n.substr(0, 3) == '070' || n.substr(0, 3) == '077';
     let numberLengthFlag = n.length == 10;
-
+    
     if (!(numberFormatFlag && numberLengthFlag)){
       this.presentToast();
     } else {
@@ -72,6 +76,10 @@ export class WelcomePage {
         let obj = JSON.parse(data.text());
         // console.log(obj.results.smscode);
         this.smsCode = obj.results.smscode;
+        
+        this.storage.set('mobileNumber', this.myNumber);
+        this.storage.set('verificationCode', this.smsCode);
+
         this.navCtrl.push(VerificationPage, {
           mobileNumber : this.myNumber,
           verificationCode : this.smsCode 

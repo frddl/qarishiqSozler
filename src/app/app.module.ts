@@ -8,7 +8,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { VerificationPage } from '../pages/verification/verification';
 import { IonDigitKeyboard } from '../components/ion-digit-keyboard/ion-digit-keyboard.module';
-
+import { IonicStorageModule } from '@ionic/storage';
 import { HttpModule } from '@angular/http';
 
 @NgModule({
@@ -21,7 +21,8 @@ import { HttpModule } from '@angular/http';
     BrowserModule,
     IonDigitKeyboard,
     HttpModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -1,7 +1,18 @@
 
-<ion-content padding>
-
-</ion-content>
+<ion-content padding="false" no-bounce text-center>
+  
+    <div class="welcomeBlock">
+      <p>Kod: </p>
+      
+      <ion-item class="item-centered">
+        <ion-input disabled type="number" name="code" focused placeholder="məs: 1234" style="text-align: center"></ion-input>
+      </ion-item>
+    </div>
+    
+    <button ion-button outline block color="dark" (click)="validateCode()">Davam et</button>
+  
+  </ion-content>
+  
 
 <ion-digit-keyboard
     [align]="keyboardSettings.align"
