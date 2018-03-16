@@ -6,6 +6,7 @@ import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { WelcomePage } from '../pages/welcome/welcome';
+import { GamePage } from '../pages/game/game';
 import { VerificationPage } from '../pages/verification/verification';
 import { IonDigitKeyboard } from '../components/ion-digit-keyboard/ion-digit-keyboard.module';
 import { IonicStorageModule } from '@ionic/storage';
@@ -15,7 +16,8 @@ import { HttpModule } from '@angular/http';
   declarations: [
     MyApp,
     WelcomePage,
-    VerificationPage
+    VerificationPage,
+    GamePage
   ],
   imports: [
     BrowserModule,
@@ -28,7 +30,8 @@ import { HttpModule } from '@angular/http';
   entryComponents: [
     MyApp,
     WelcomePage,
-    VerificationPage
+    VerificationPage,
+    GamePage
   ],
   providers: [
     StatusBar,

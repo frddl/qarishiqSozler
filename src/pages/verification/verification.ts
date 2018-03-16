@@ -16,6 +16,7 @@ export class VerificationPage {
   mobileNumber: string;
   verificationCode: string;
   code = "";
+  verified: boolean;
   
   constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl : ToastController, private http : Http , private storage : Storage) {
     storage.get('mobileNumber').then((val) => {
@@ -81,6 +82,7 @@ export class VerificationPage {
       .subscribe(data => {
         let obj = JSON.parse(data.text());
         // console.log(obj.results.smscode);
+        if (obj.results.subscribe == 1) this.storage.set('authorized', true);
         console.log(obj);
       }, error => {
         console.log(error.status);

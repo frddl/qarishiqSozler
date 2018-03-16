@@ -4,13 +4,13 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { WelcomePage } from '../pages/welcome/welcome';
-import { VerificationPage } from '../pages/verification/verification';
 import { Storage } from '@ionic/storage';
 import { GamePage } from '../pages/game/game';
 
 @Component({
   templateUrl: 'app.html'
 })
+
 export class MyApp {
   rootPage:any = WelcomePage;
 
@@ -19,13 +19,12 @@ export class MyApp {
       statusBar.backgroundColorByHexString("#000000");
       statusBar.backgroundColorByName("black"); 
       statusBar.styleBlackOpaque();
+      storage.clear();
       storage.get('authorized').then((val) => {
-        console.log('Authorized:', val);
-        this.rootPage = GamePage;
+        if (val == true) this.rootPage = GamePage;
       });
 
       splashScreen.hide();
     });
-
   }
 }
