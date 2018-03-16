@@ -4,6 +4,7 @@ import { IonDigitKeyboardCmp, IonDigitKeyboardOptions } from '../../components/i
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { GamePage } from '../game/game';
 
 @IonicPage()
 @Component({
@@ -81,9 +82,9 @@ export class VerificationPage {
       this.http.post('/api/', body, options)
       .subscribe(data => {
         let obj = JSON.parse(data.text());
-        // console.log(obj.results.smscode);
         if (obj.results.subscribe == 1) this.storage.set('authorized', true);
-        console.log(obj);
+        
+        this.navCtrl.push(GamePage, { });
       }, error => {
         console.log(error.status);
       });

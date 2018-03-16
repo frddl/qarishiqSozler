@@ -19,7 +19,7 @@ export class MyApp {
       statusBar.backgroundColorByHexString("#000000");
       statusBar.backgroundColorByName("black"); 
       statusBar.styleBlackOpaque();
-      storage.clear();
+      //storage.clear();
       storage.get('authorized').then((val) => {
         if (val == true) this.rootPage = GamePage;
       });
