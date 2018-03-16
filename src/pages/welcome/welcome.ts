@@ -15,7 +15,6 @@ export class WelcomePage {
 
   myNumber = "";
   smsCode = "";
-  username;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, private http: Http, private storage : Storage) {
     storage.clear();
@@ -74,17 +73,12 @@ export class WelcomePage {
       this.http.post('/api/', body, options)
       .subscribe(data => {
         let obj = JSON.parse(data.text());
-        // console.log(obj.results.smscode);
         this.smsCode = obj.results.smscode;
         
         this.storage.set('mobileNumber', this.myNumber);
         this.storage.set('verificationCode', this.smsCode);
 
-        this.navCtrl.push(VerificationPage, {
-          mobileNumber : this.myNumber,
-          verificationCode : this.smsCode 
-        });
-
+        this.navCtrl.push(VerificationPage, { });
       }, error => {
         console.log(error.status);
       });

@@ -15,22 +15,17 @@ export class VerificationPage {
 
   mobileNumber: string;
   verificationCode: string;
-  code: string; 
+  code = "";
   
   constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl : ToastController, private http : Http , private storage : Storage) {
-    this.mobileNumber = navParams.get('mobileNumber');
-    this.verificationCode = navParams.get('verificationCode');
-
-    console.log(this.mobileNumber + ' ' + this.verificationCode); 
-
-    //storage.set('mobileNumber', this.mobileNumber);
-    //storage.set('verificationCode', this.verificationCode);
     storage.get('mobileNumber').then((val) => {
       console.log('Mobile number:', val);
+      this.mobileNumber = val;
     });
 
     storage.get('verificationCode').then((val) => {
       console.log('Verification code:', val);
+      this.verificationCode = val;
     });
   }
 
@@ -51,33 +46,26 @@ export class VerificationPage {
     theme: 'light'
   }
 
-  enterNumber(key: number) {
-    let f = document.getElementsByName('code')[0].innerText;
-    console.log(f);
+  enterCode(key: number) {
+    let f = document.getElementsByName('smsCode')[0].innerText;
     if (f.length < 4) {
-      document.getElementsByName('code')[0].innerText += key;
+      document.getElementsByName('smsCode')[0].innerText += key;
       this.code += key;
     }
   }
 
-  removeNumber(){
-    let f = document.getElementsByName('code')[0].innerText;
-    document.getElementsByName('code')[0].innerText = (f.substring(0, f.length - 1));
-    //this.code = this.code.substring(0, this.code.length - 1);
+  removeCode(){
+    let f = document.getElementsByName('smsCode')[0].innerText;
+    document.getElementsByName('smsCode')[0].innerText = (f.substring(0, f.length - 1));
+    this.code = this.code.substring(0, this.code.length - 1);
   }
 
   public validateCode(){
-    console.log('code',this.code);
-    console.log('ver',this.verificationCode); 
-    console.log(typeof(this.code) + ' ' + typeof(this.verificationCode))
-      
-    /*
-     if ((this.code === this.verificationCode)){
-      console.log(typeof(this.code) + ' ' + typeof(this.verificationCode))
+    let codeValidationFlag = this.code == this.verificationCode;
+    console.log(this.code);
+    if (!codeValidationFlag){
       this.presentToast();
     } else {
-      console.log('success');
-     
       var headers = new Headers();
       headers.append("Accept", 'application/json');
       headers.append('Content-Type', 'application/json' );
@@ -94,21 +82,10 @@ export class VerificationPage {
         let obj = JSON.parse(data.text());
         // console.log(obj.results.smscode);
         console.log(obj);
-        
-        this.smsCode = obj.results.smscode;
-        
-        this.navCtrl.push(VerificationPage, {
-          mobileNumber : this.myNumber,
-          verificationCode : this.smsCode 
-        });
-        
-        
       }, error => {
         console.log(error.status);
       });
-      
     }
-    */
   }
 
   presentToast() {

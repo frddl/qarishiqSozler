@@ -5,7 +5,7 @@
       <p>Kod: </p>
       
       <ion-item class="item-centered">
-        <ion-input disabled type="number" name="code" focused placeholder="məs: 1234" style="text-align: center"></ion-input>
+        <ion-input disabled type="number" name="smsCode" focused placeholder="məs: 1234" style="text-align: center"></ion-input>
       </ion-item>
     </div>
     
@@ -24,8 +24,8 @@
     [showLetters]="keyboardSettings.showLetters"
     [swipeToHide]="keyboardSettings.swipeToHide"
     [theme]="keyboardSettings.theme"
-    (numberClick)="enterNumber($event)"
-    (rightActionClick)="removeNumber()"
+    (numberClick)="enterCode($event)"
+    (rightActionClick)="removeCode()"
 >
 
 </ion-digit-keyboard>

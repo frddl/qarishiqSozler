@@ -5,6 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { WelcomePage } from '../pages/welcome/welcome';
 import { VerificationPage } from '../pages/verification/verification';
+import { Storage } from '@ionic/storage';
+import { GamePage } from '../pages/game/game';
 
 @Component({
   templateUrl: 'app.html'
@@ -12,11 +14,16 @@ import { VerificationPage } from '../pages/verification/verification';
 export class MyApp {
   rootPage:any = WelcomePage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, storage : Storage) {
     platform.ready().then(() => {
       statusBar.backgroundColorByHexString("#000000");
       statusBar.backgroundColorByName("black"); 
       statusBar.styleBlackOpaque();
+      storage.get('authorized').then((val) => {
+        console.log('Authorized:', val);
+        this.rootPage = GamePage;
+      });
+
       splashScreen.hide();
     });
 
