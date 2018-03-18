@@ -10,6 +10,7 @@ import { ToastController } from 'ionic-angular';
   selector: 'page-game',
   templateUrl: 'game.html',
 })
+
 export class GamePage {
 
   mobileNumber = '';
@@ -21,10 +22,9 @@ export class GamePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private storage: Storage, private toastCtrl: ToastController) {
     storage.get('mobileNumber').then((val) => {
+      this.requestWord(val);
       this.mobileNumber = val;
     });
-
-    this.requestWord();
   }
 
   public checkWord(word){
@@ -40,10 +40,10 @@ export class GamePage {
       this.isNotCorrect();
     }
 
-    this.requestWord();
+    this.requestWord(this.mobileNumber);
   }
 
-  private requestWord(){
+  private requestWord(mobileNumber){
     var headers = new Headers();
     headers.append("Accept", 'application/json');
     headers.append('Content-Type', 'application/json' );
@@ -52,7 +52,7 @@ export class GamePage {
     let body = {
       "token" : "appqs-47421358-fb3f-4596-a259-d2bf7d925718",
       "action" : "start",
-      "msisdn" : "994" + this.mobileNumber.substr(1)
+      "msisdn" : "994" + mobileNumber.substr(1)
     };
 
     this.http.post(/*'http://4545.az/appapi/8112-1122/'*/'/api', body, options)

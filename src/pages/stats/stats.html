@@ -1,3 +1,22 @@
-<ion-content padding>
+<ion-content padding style="text-align: center;">
+    <ion-card>
+        <ion-card-header style="text-align: center;">
+            Stats
+        </ion-card-header>
 
+        <ion-list style="align-content: center; align-items: center; padding-left: 15%">
+            <button ion-item>
+                <ion-icon name="md-checkmark-circle-outline" item-start></ion-icon>
+                True Answers - {{trueAnswers}}
+            </button>
+            
+            <button ion-item>
+                <ion-icon name="medical" item-start></ion-icon>
+                Hospital
+            </button>     
+                   
+        </ion-list>        
+    </ion-card>
+    
+    {{trueAnswers}} | {{usrPoints}}
 </ion-content>

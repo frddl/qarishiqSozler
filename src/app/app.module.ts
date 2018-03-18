@@ -29,10 +29,7 @@ import { StatsPage } from '../pages/stats/stats';
     BrowserModule,
     IonDigitKeyboard,
     HttpModule,
-    IonicModule.forRoot(MyApp, {
-      tabsPlacement: 'bottom',
-      iconMode: 'md',
-    }),
+    IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     SuperTabsModule.forRoot(),
   ],
