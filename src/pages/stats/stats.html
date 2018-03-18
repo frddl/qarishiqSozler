@@ -1,5 +1,6 @@
 <ion-content padding style="text-align: center;">
-    <ion-card>
+    <ion-card item-height="100%">
+        <br>
         <ion-card-header style="text-align: center;">
             Stats
         </ion-card-header>
@@ -11,12 +12,16 @@
             </button>
             
             <button ion-item>
-                <ion-icon name="medical" item-start></ion-icon>
-                Hospital
+                <ion-icon name="md-trophy" item-start></ion-icon>
+                User Points - {{usrPoints}}
             </button>     
-                   
+            
+            <button ion-item>
+                <ion-icon name="md-call" item-start></ion-icon>
+                 {{mobileNumber}}
+            </button>     
+            
+            <br><br><br>
         </ion-list>        
     </ion-card>
-    
-    {{trueAnswers}} | {{usrPoints}}
 </ion-content>

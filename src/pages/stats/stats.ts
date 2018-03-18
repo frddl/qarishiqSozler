@@ -14,10 +14,12 @@ export class StatsPage {
   private msg;
   private trueAnswers;
   private usrPoints;
+  private mobileNumber;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private storage: Storage) {
     storage.get('mobileNumber').then((val) => {
       this.requestStats(val);
+      this.mobileNumber = val;
     });
   }
 
@@ -44,5 +46,9 @@ export class StatsPage {
     }, error => {
       console.log(error.status);
     });
+
+    setTimeout(() => {
+      this.requestStats(mobileNumber);
+    }, 5000);
   }
 }
