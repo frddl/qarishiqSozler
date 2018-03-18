@@ -79,12 +79,12 @@ export class VerificationPage {
         "msisdn" : "994" + this.mobileNumber.substr(1)
       };
 
-      this.http.post('/api/', body, options)
+      this.http.post('http://4545.az/appapi/8112-1122/', body, options)
       .subscribe(data => {
         let obj = JSON.parse(data.text());
         if (obj.results.subscribe == 1) this.storage.set('authorized', true);
         
-        this.navCtrl.push(GamePage, { });
+        this.navCtrl.push(GamePage);
       }, error => {
         console.log(error.status);
       });

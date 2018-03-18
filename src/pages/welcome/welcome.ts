@@ -11,13 +11,14 @@ import { Storage } from '@ionic/storage';
   selector: 'page-welcome',
   templateUrl: 'welcome.html',
 })
+
 export class WelcomePage {
 
   myNumber = "";
   smsCode = "";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, private http: Http, private storage : Storage) {
-    // storage.clear();
+    //storage.clear();
   }
 
   @ViewChild(IonDigitKeyboardCmp) keyboard;
@@ -69,16 +70,14 @@ export class WelcomePage {
         "action" : "smscode",
         "msisdn" : "994" + n.substr(1)
       };
-
-      this.http.post('/api/', body, options)
+      
+      this.http.post('http://4545.az/appapi/8112-1122/', body, options)
       .subscribe(data => {
         let obj = JSON.parse(data.text());
         this.smsCode = obj.results.smscode;
-        
         this.storage.set('mobileNumber', this.myNumber);
         this.storage.set('verificationCode', this.smsCode);
-
-        this.navCtrl.push(VerificationPage, { });
+        this.navCtrl.push(VerificationPage);
       }, error => {
         console.log(error.status);
       });
