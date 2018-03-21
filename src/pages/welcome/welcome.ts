@@ -4,7 +4,6 @@ import { IonDigitKeyboardCmp, IonDigitKeyboardOptions } from '../../components/i
 import { ToastController } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { VerificationPage } from '../verification/verification';
-import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -14,11 +13,10 @@ import { Storage } from '@ionic/storage';
 
 export class WelcomePage {
 
-  myNumber = "";
-  smsCode = "";
+  myNumber = '';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, private http: Http, private storage : Storage) {
-    //storage.clear();
+  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, private http: Http) {
+    
   }
 
   @ViewChild(IonDigitKeyboardCmp) keyboard;
@@ -71,13 +69,13 @@ export class WelcomePage {
         "msisdn" : "994" + n.substr(1)
       };
       
-      this.http.post('http://4545.az/appapi/8112-1122/', body, options)
+      this.http.post('/api', body, options)
       .subscribe(data => {
         let obj = JSON.parse(data.text());
-        this.smsCode = obj.results.smscode;
-        this.storage.set('mobileNumber', this.myNumber);
-        this.storage.set('verificationCode', this.smsCode);
-        this.navCtrl.push(VerificationPage);
+        this.navCtrl.push(VerificationPage, {
+          'mobileNumber' : this.myNumber,
+          'verificationCode' : obj.results.smscode
+        });
       }, error => {
         console.log(error.status);
       });
@@ -89,10 +87,6 @@ export class WelcomePage {
       message: 'Mobil nömrə düzgün daxil edilməyib',
       duration: 1500,
       position: 'bottom'
-    });
-  
-    toast.onDidDismiss(() => {
-      // do nothing
     });
   
     toast.present();

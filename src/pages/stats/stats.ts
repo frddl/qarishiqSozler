@@ -11,10 +11,9 @@ import { Storage } from '@ionic/storage';
 
 export class StatsPage {
 
-  private msg;
-  private trueAnswers;
-  private usrPoints;
-  private mobileNumber;
+  private trueAnswers = '';
+  private usrPoints = '';
+  private mobileNumber = '';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private storage: Storage) {
     storage.get('mobileNumber').then((val) => {
@@ -35,20 +34,17 @@ export class StatsPage {
       "msisdn" : "994" + mobileNumber.substr(1)
     };
 
-    this.http.post(/*'http://4545.az/appapi/8112-1122/'*/'/api', body, options)
+    this.http.post('/api', body, options)
     .subscribe(data => {
       let obj = JSON.parse(data.text());
-
       this.usrPoints = obj.results.usrpoints;
       this.trueAnswers = obj.results.trueanswers;
-      this.msg = obj.results.msg;
-      
     }, error => {
       console.log(error.status);
     });
 
     setTimeout(() => {
       this.requestStats(mobileNumber);
-    }, 5000);
+    }, 1000);
   }
 }

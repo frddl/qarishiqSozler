@@ -1,25 +1,43 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the RulesPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Http, Headers, RequestOptions } from '@angular/http';
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
   selector: 'page-rules',
   templateUrl: 'rules.html',
 })
+
 export class RulesPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  rules = '';
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private storage: Storage) {
+    this.storage.get("mobileNumber").then(val => {
+      if (val != null) 
+        this.requestRules(val);
+    });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RulesPage');
-  }
+  requestRules(mobileNumber){
+    var headers = new Headers();
+    headers.append("Accept", 'application/json');
+    headers.append('Content-Type', 'application/json' );
+    let options = new RequestOptions({ headers: headers });
+    
+    let body = {
+      "token" : "appqs-47421358-fb3f-4596-a259-d2bf7d925718",
+      "action" : "rules",
+      "msisdn" : "994" + mobileNumber.substr(1)
+    };
 
+    this.http.post('/api', body, options)
+    .subscribe(data => {
+      let obj = JSON.parse(data.text());
+      this.rules = obj.results.rules;
+    }, error => {
+      console.log(error.status);
+    });
+  }
 }

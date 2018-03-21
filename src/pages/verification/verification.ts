@@ -4,7 +4,7 @@ import { IonDigitKeyboardCmp, IonDigitKeyboardOptions } from '../../components/i
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { GamePage } from '../game/game';
+import { TabsPage } from '../tabs/tabs';
 
 @IonicPage()
 @Component({
@@ -17,18 +17,10 @@ export class VerificationPage {
   mobileNumber: string;
   verificationCode: string;
   code = "";
-  verified: boolean;
   
   constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl : ToastController, private http : Http , private storage : Storage) {
-    storage.get('mobileNumber').then((val) => {
-      console.log('Mobile number:', val);
-      this.mobileNumber = val;
-    });
-
-    storage.get('verificationCode').then((val) => {
-      console.log('Verification code:', val);
-      this.verificationCode = val;
-    });
+    this.mobileNumber = this.navParams.get('mobileNumber');
+    this.verificationCode = this.navParams.get('verificationCode');
   }
 
   @ViewChild(IonDigitKeyboardCmp) keyboard;
@@ -79,12 +71,15 @@ export class VerificationPage {
         "msisdn" : "994" + this.mobileNumber.substr(1)
       };
 
-      this.http.post('http://4545.az/appapi/8112-1122/', body, options)
+      this.http.post('/api', body, options)
       .subscribe(data => {
         let obj = JSON.parse(data.text());
-        if (obj.results.subscribe == 1) this.storage.set('authorized', true);
-        
-        this.navCtrl.push(GamePage);
+        if (obj.results.subscribe == 1) {
+          this.storage.set('authorized', true);
+          this.storage.set('mobileNumber', this.mobileNumber);
+          this.navCtrl.push(TabsPage);
+        } else 
+          this.unexpectedError();
       }, error => {
         console.log(error.status);
       });
@@ -98,8 +93,14 @@ export class VerificationPage {
       position: 'bottom'
     });
   
-    toast.onDidDismiss(() => {
-      // do nothing
+    toast.present();
+  }
+
+  unexpectedError(){
+    let toast = this.toastCtrl.create({
+      message: 'Xəta!',
+      duration: 1500,
+      position: 'bottom'
     });
   
     toast.present();

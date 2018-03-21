@@ -21,9 +21,8 @@ export class GamePage {
   @ViewChild(Content) content: Content;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private storage: Storage, private toastCtrl: ToastController) {
-    storage.get('mobileNumber').then((val) => {
+    storage.get("mobileNumber").then((val) => {
       this.requestWord(val);
-      this.mobileNumber = val;
     });
   }
 
@@ -34,8 +33,7 @@ export class GamePage {
     console.log(this.originalWord);
 
     if (correct){
-      this.isCorrect();
-      this.topUp();
+      this.topUp(this.mobileNumber);
     } else {
       this.isNotCorrect();
     }
@@ -44,6 +42,7 @@ export class GamePage {
   }
 
   private requestWord(mobileNumber){
+    this.mobileNumber = mobileNumber;
     var headers = new Headers();
     headers.append("Accept", 'application/json');
     headers.append('Content-Type', 'application/json' );
@@ -55,7 +54,7 @@ export class GamePage {
       "msisdn" : "994" + mobileNumber.substr(1)
     };
 
-    this.http.post(/*'http://4545.az/appapi/8112-1122/'*/'/api', body, options)
+    this.http.post('/api', body, options)
     .subscribe(data => {
       let obj = JSON.parse(data.text());
       this.scrambledWord = obj.results.scrambled;
@@ -69,7 +68,7 @@ export class GamePage {
     });
   }
 
-  private topUp(){
+  private topUp(mobileNumber){
     var headers = new Headers();
     headers.append("Accept", 'application/json');
     headers.append('Content-Type', 'application/json' );
@@ -78,14 +77,12 @@ export class GamePage {
     let body = {
       "token" : "appqs-47421358-fb3f-4596-a259-d2bf7d925718",
       "action" : "topup",
-      "msisdn" : "994" + this.mobileNumber.substr(1)
+      "msisdn" : "994" + mobileNumber.substr(1)
     };
 
-    this.http.post(/*'http://4545.az/appapi/8112-1122/'*/'/api', body, options)
+    this.http.post('/api', body, options)
     .subscribe(data => {
-      let obj = JSON.parse(data.text());
-      console.log(obj);
-      this.storage.set("points", obj.results.usrpoints);
+      this.isCorrect();      
     }, error => {
       console.log(error.status);
     });
