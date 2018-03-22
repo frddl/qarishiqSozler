@@ -1,17 +1,35 @@
 page-welcome {
     input {
         text-align: center;
-     }
+    }
 
     ion-item {
         padding-right: 5% !important;
     }
 
-    .welcomeBlock {
-        padding: 12.5% 0% 12.5% 0%;
+    input[type=tel], select {
+        width: 100%;
+        background-color: white;
+        padding: 5% 5%;
+        margin: 2% 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
     }
 
-    * {
-        font-size: 100%;
+    .button {
+        width: 100%;
+        background-color:#2AB736;
+        padding: 5% 5%;
+        margin: 2% 0;
+        display: inline-block;
+        border: 1px solid #2AB736;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .white {
+        color: white;
     }
 }

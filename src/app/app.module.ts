@@ -7,7 +7,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { GamePage } from '../pages/game/game';
-import { VerificationPage } from '../pages/verification/verification';
 import { IonDigitKeyboard } from '../components/ion-digit-keyboard/ion-digit-keyboard.module';
 import { IonicStorageModule } from '@ionic/storage';
 import { HttpModule } from '@angular/http';
@@ -19,7 +18,6 @@ import { StatsPage } from '../pages/stats/stats';
   declarations: [
     MyApp,
     WelcomePage,
-    VerificationPage,
     GamePage,
     TabsPage,
     RulesPage,
@@ -37,7 +35,6 @@ import { StatsPage } from '../pages/stats/stats';
   entryComponents: [
     MyApp,
     WelcomePage,
-    VerificationPage,
     GamePage,
     TabsPage,
     RulesPage,

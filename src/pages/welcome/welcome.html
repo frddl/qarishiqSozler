@@ -1,32 +1,25 @@
+<ion-header>
+  <img src="assets/imgs/welcomeLogo.png" />
+</ion-header>
 
-<img style="width: 110% !important; padding: 0% 0% 0% 0%" src="../../assets/imgs/welcomeLogo.png">
-
-<ion-content padding="false" no-bounce text-center>
-  
-  <div class="welcomeBlock">
-    <p>Davam etmək üçün mobil nömrənizi daxil edin</p>
-    
-    <ion-item class="item-centered">
-      <ion-input disabled type="number" name="mobileNumber" focused placeholder="məs: 0551234567" style="text-align: center"></ion-input>
-    </ion-item>
-  </div>
-  
-  <button ion-button outline block color="dark" (click)="validateNumber()">Davam et</button>
-
+<ion-content has-bouncing="false" overflow-scroll="false" class="has-header has-subheader" padding="false" text-center style="background-color:#B91226">
+  <div class="welcomeDiv">
+    <ion-input type="tel" maxlength="10" [(ngModel)]="myNumber" focused placeholder="Mobil nömrənizi daxil edin" style="text-align: center"></ion-input>
+    <div *ngIf="showSMSField">
+        <ion-input type="tel" maxlength="4" [(ngModel)]="smsCode" required focused placeholder="SMS Kod" style="text-align: center"></ion-input>
+    </div>
+    <button *ngIf="!showSMSField" ion-button outline block style="color: white" (click)="validateNumber()">
+      Davam et
+    </button>
+    <button *ngIf="showSMSField" ion-button outline block style="color: white" (click)="validateCode()">
+      Təsdiqlə
+    </button>
+  </div>  
 </ion-content>
 
-<ion-digit-keyboard
-    [align]="keyboardSettings.align"
-    [width]="keyboardSettings.width"
-    [visible]="keyboardSettings.visible"
-    [leftActionOptions]="keyboardSettings.leftActionOptions"
-    [rightActionOptions]="keyboardSettings.rightActionOptions"
-    [roundButtons]="keyboardSettings.roundButtons"
-    [showLetters]="keyboardSettings.showLetters"
-    [swipeToHide]="keyboardSettings.swipeToHide"
-    [theme]="keyboardSettings.theme"
-    (numberClick)="enterNumber($event)"
-    (rightActionClick)="removeNumber()"
->
-
-</ion-digit-keyboard>
+<ion-footer text-center>
+  <div *ngIf="showSMSField">
+    <p *ngIf="!showSendAgain" style="color:white">00:<span *ngIf="time < 10">0</span>{{time}}</p>
+    <p *ngIf="showSendAgain" style="color:white; text-decoration: underline;" (click)="reSend()">SMS Kod gəlmədi?</p>
+  </div>
+</ion-footer>

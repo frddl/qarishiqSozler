@@ -29,9 +29,6 @@ export class GamePage {
   public checkWord(word){
     let correct = word.toLocaleUpperCase() == this.originalWord;
 
-    console.log(word.toLocaleUpperCase());
-    console.log(this.originalWord);
-
     if (correct){
       this.topUp(this.mobileNumber);
     } else {

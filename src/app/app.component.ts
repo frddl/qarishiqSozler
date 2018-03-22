@@ -14,8 +14,6 @@ export class MyApp {
   rootPage:any ;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, storage : Storage) {
-    storage.clear();
-
     statusBar.backgroundColorByHexString("#000000");
     statusBar.backgroundColorByName("black"); 
     statusBar.styleBlackOpaque();
