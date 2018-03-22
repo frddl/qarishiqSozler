@@ -14,20 +14,20 @@ export class MyApp {
   rootPage:any ;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, storage : Storage) {
+    storage.clear();
     statusBar.backgroundColorByHexString("#000000");
     statusBar.backgroundColorByName("black"); 
     statusBar.styleBlackOpaque();
           
     platform.ready().then(() => {
       storage.get('authorized').then((val) => {
+        splashScreen.hide();
         if (val == true) {
           this.rootPage = TabsPage;
         } else {
           this.rootPage = WelcomePage;
         }
       });
-
-      splashScreen.hide();
     });
   }
 }

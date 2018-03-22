@@ -27,7 +27,19 @@ import { StatsPage } from '../pages/stats/stats';
     BrowserModule,
     IonDigitKeyboard,
     HttpModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      platforms : {
+        android : {
+          scrollAssist: false,
+          autoFocusAssist: false
+        },
+        
+        ios : {
+          scrollAssist: false,
+          autoFocusAssist: false
+        },
+      }
+    }),
     IonicStorageModule.forRoot(),
     SuperTabsModule.forRoot(),
   ],

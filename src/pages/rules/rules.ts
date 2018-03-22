@@ -32,7 +32,7 @@ export class RulesPage {
       "msisdn" : "994" + mobileNumber.substr(1)
     };
 
-    this.http.post('/api', body, options)
+    this.http.post('http://4545.az/appapi/8112-1122/', body, options)
     .subscribe(data => {
       let obj = JSON.parse(data.text());
       this.rules = obj.results.rules;

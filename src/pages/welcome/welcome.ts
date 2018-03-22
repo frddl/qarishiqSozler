@@ -81,7 +81,7 @@ export class WelcomePage {
         "msisdn" : "994" + n.substr(1)
       };
       
-      this.http.post('/api', body, options)
+      this.http.post('http://4545.az/appapi/8112-1122/', body, options)
       .subscribe(data => {
         let obj = JSON.parse(data.text());
         this.sentCode = obj.results.smscode;
@@ -108,7 +108,7 @@ export class WelcomePage {
         "msisdn" : "994" + this.myNumber
       };
 
-      this.http.post('/api', body, options)
+      this.http.post('http://4545.az/appapi/8112-1122/', body, options)
       .subscribe(data => {
         let obj = JSON.parse(data.text());
         if (obj.results.subscribe == 1) {
