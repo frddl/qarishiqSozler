@@ -3,7 +3,7 @@
     <name>Qarışıq Sözlər</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="faridmmmdv@gmail.com" href="http://github.com/frddl/">Farid Mammadov</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.0.155:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

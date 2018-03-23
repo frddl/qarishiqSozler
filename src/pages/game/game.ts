@@ -51,7 +51,7 @@ export class GamePage {
       "msisdn" : "994" + mobileNumber.substr(1)
     };
 
-    this.http.post('http://4545.az/appapi/8112-1122/', body, options)
+    this.http.post('/api', body, options)
     .subscribe(data => {
       let obj = JSON.parse(data.text());
       this.scrambledWord = obj.results.scrambled;
@@ -77,7 +77,7 @@ export class GamePage {
       "msisdn" : "994" + mobileNumber.substr(1)
     };
 
-    this.http.post('http://4545.az/appapi/8112-1122/', body, options)
+    this.http.post('/api', body, options)
     .subscribe(data => {
       this.isCorrect();      
     }, error => {
