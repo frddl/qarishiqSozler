@@ -15,6 +15,8 @@ export class GamePage {
 
   mobileNumber = '';
   scrambledWord = '';
+  scrArr = [];
+  oriArr = [];
   originalWord = '';
   msg = '';
 
@@ -56,13 +58,26 @@ export class GamePage {
       let obj = JSON.parse(data.text());
       this.scrambledWord = obj.results.scrambled;
       this.scrambledWord = this.scrambledWord.toLocaleUpperCase();
+      
+      for (let i = 0; i < this.scrambledWord.length; i++){
+        this.scrArr.push(this.scrambledWord.charAt(i));
+      }
 
+      this.oriArr.length = this.scrArr.length;
+      
       this.originalWord = obj.results.original;
       this.originalWord = this.originalWord.toLocaleUpperCase();
       this.msg = obj.results.msg;
     }, error => {
       console.log(error.status);
     });
+  }
+
+  private press(letter, index){
+    let letterButton = document.getElementById(index);
+    letterButton.style.display = 'none';
+    console.log(letterButton);
+    console.log(letter);
   }
 
   private topUp(mobileNumber){

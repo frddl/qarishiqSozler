@@ -1,18 +1,32 @@
+<ion-header>
+    <img src="assets/imgs/welcomeLogo.png" />
+</ion-header>  
 
-<ion-content padding="false" no-bounce text-center overflow-scroll="true">
+<ion-content style="background-color: #B91226;" padding="false" no-bounce text-center overflow-scroll="true">
   
   <div class="welcomeBlock">
-    <p>Scrambled word:</p>
-    <p>{{this.scrambledWord}}</p>
+    <ion-card item-height="100%">
+      <ion-item class="item-centered">
+        <ion-input type="text" disabled [(ngModel)]="inputWord" text-center></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <br>
+    <ion-card>
+      
+    </ion-card>
     
-    <p>Original word:</p>
-    <p>{{this.originalWord}}</p>
+    <div class="row letters">
+      <button class="letter" id="{{i}}" ion-button outline block *ngFor="let letter of scrArr; let i = index" (click)="press(letter, i)">{{letter}}</button>
+    </div>
     
-    <ion-item class="item-centered">
-      <ion-input type="text" focused placeholder="" [(ngModel)]="inputWord" text-center clearOnEdit></ion-input>
-    </ion-item>
+    <ion-card>
+      <p></p>
+    </ion-card>
   </div>
+
+  <br>  
   
-  <button ion-button outline block color="dark" (click)="checkWord(inputWord)">Davam et</button>
+  <button class="process" ion-button outline block color="dark" (click)="checkWord(inputWord)">Davam et</button>
 
 </ion-content>

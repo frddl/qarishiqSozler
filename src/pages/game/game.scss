@@ -1,3 +1,31 @@
 page-game {
 
+    .letters { 
+        margin-left: 2%;
+        margin-right: 2%;
+        align-content: center !important;
+        align-items: center !important;
+        align-self: center !important;
+    }
+
+    .letter {
+        border-color: white; 
+        background-color: white; 
+        color: #B91226;
+        width: 8%;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+
+    .button.process {
+        color: white;
+        width: 100%;
+        background-color:#2AB736;
+        padding: 5% 5%;
+        margin: 2% 0;
+        display: inline-block;
+        border: 1px solid #2AB736;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
 }
