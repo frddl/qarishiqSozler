@@ -2,29 +2,30 @@
   <img src="assets/imgs/welcomeLogo.png" />
 </ion-header>
 <ion-content padding style="text-align: center; background: #B91226; ">
-    <ion-card item-height="100%">
+    <ion-card item-height="100%" style="height: 95%">
         <br>
-        <ion-card-header style="text-align: center;">
+        <ion-card-header style="font-size: 125%; font-weight: bold; text-align: center;">
             Oyunun Statistikası
         </ion-card-header>
-
-        <ion-list style="align-content: center; align-items: center;">
-            <button ion-item>
-                <ion-icon name="md-checkmark-circle-outline" item-start></ion-icon>
-                Düzgün cavablar: {{trueAnswers}}
+        <br><br><br>
+        
+        <ion-list style="padding-left: 7.5%; align-content: center; align-items: center;">
+            <button color="primary" ion-item>
+                <ion-icon name="checkmark-circle-outline" item-start></ion-icon>
+                {{trueAnswers}} düzgün cavab
             </button>
-            
-            <button ion-item>
-                <ion-icon name="md-trophy" item-start></ion-icon>
-                Xallar - {{usrPoints}}
+            <br>
+            <button color="primary" ion-item>
+                <ion-icon name="trophy" item-start></ion-icon>
+                {{usrPoints}} xal
             </button>     
             
-            <button ion-item>
-                <ion-icon name="md-call" item-start></ion-icon>
+            <br>
+            <button color="primary" ion-item>
+                <ion-icon name="call" item-start></ion-icon>
                  {{mobileNumber}}
             </button>     
-            
-            <br><br><br>
+        
         </ion-list>        
     </ion-card>
 </ion-content>

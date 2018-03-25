@@ -11,6 +11,12 @@ page-game {
         }
     }
 
+    .points {
+        color: #B91226 !important; 
+        font-size: 125%; 
+        font-weight: bold !important
+    }
+
     .letters { 
         margin-left: 2%;
         margin-right: 2%;
@@ -28,6 +34,7 @@ page-game {
         margin-right: 1%;
         border-radius: 50%;
         font-weight: bold;
+        font-size: 110%;
     }
 
     .button.process {

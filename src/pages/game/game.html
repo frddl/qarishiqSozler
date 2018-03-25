@@ -1,14 +1,22 @@
 <ion-header>
     <img src="assets/imgs/welcomeLogo.png" />
-</ion-header>  
+</ion-header>
+
 
 <ion-content style="background-color: #B91226;" padding="false" no-bounce text-center overflow-scroll="true">
-  
+  <div class="welcomeBlock">
+    <ion-card *ngIf="usrPoints > 0" id="points" text-center>
+      <br>
+      <p class="points">{{usrPoints}} xal</p>
+      <br>
+    </ion-card>  
+  </div>
+
   <div class="welcomeBlock">
     <br>
     <ion-card item-height="100%">
       <ion-row>
-        <ion-input id="inputBox" type="text" disabled [(ngModel)]="inputWord" text-center>{{inputWord}}</ion-input>
+        <ion-input [ngClass]="{'animated infinite rubberBand': animateSuccess}" id="inputBox" type="text" disabled [(ngModel)]="inputWord" text-center>{{inputWord}}</ion-input>
         <button class="clear" *ngIf="indexes.length > 0" ion-button outline block color="dark" (click)="clear()">SİL</button>
       </ion-row>
     </ion-card>  
@@ -28,7 +36,3 @@
   
   <button class="process" ion-button outline block color="dark" (click)="newWord(mobileNumber)">NÖVBƏTİ SÖZ</button>
 </ion-content>
-
-<ion-footer id="points" text-center>
-  <p *ngIf="usrPoints > 0" style="color: white !important">{{usrPoints}} xal</p>
-</ion-footer>

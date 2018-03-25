@@ -19,8 +19,8 @@ export class TabsPage {
   
   }
 
-  a() {
-
+  popupContact() {
+    alert("E-mail: support@simtoday.net\nTel: (012) 404 1558")
   }
 
   navigate(dir){

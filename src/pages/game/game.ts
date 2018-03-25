@@ -3,10 +3,8 @@ import { IonicPage, NavController, NavParams, AlertController, Platform } from '
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import { Content } from 'ionic-angular';
-import { ToastController } from 'ionic-angular';
 import swal from 'sweetalert2';
 import { SmartAudio } from '../../providers/smart-audio/smart-audio';
-import { NativeAudio } from '@ionic-native/native-audio';
 
 @IonicPage()
 @Component({
@@ -25,14 +23,37 @@ export class GamePage {
   inputWord = '';
   indexes = [];
   usrPoints = 0;
+  animateSuccess = false;
 
   public unregisterBackButtonAction: any;
 
   @ViewChild(Content) content: Content;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private storage: Storage, private toastCtrl: ToastController, private smartAudio: SmartAudio, public alertCtrl: AlertController, public platform: Platform) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private storage: Storage, private smartAudio: SmartAudio, public alertCtrl: AlertController, public platform: Platform) {
     storage.get("mobileNumber").then((val) => {
+      this.requestStats(val);
       this.requestWord(val);
+    });
+  }
+
+  requestStats(mobileNumber){
+    var headers = new Headers();
+    headers.append("Accept", 'application/json');
+    headers.append('Content-Type', 'application/json' );
+    let options = new RequestOptions({ headers: headers });
+    
+    let body = {
+      "token" : "appqs-47421358-fb3f-4596-a259-d2bf7d925718",
+      "action" : "stat",
+      "msisdn" : "994" + mobileNumber.substr(1)
+    };
+
+    this.http.post('/api', body, options)
+    .subscribe(data => {
+      let obj = JSON.parse(data.text());
+      this.usrPoints = obj.results.usrpoints;
+    }, error => {
+      console.log(error.status);
     });
   }
 
@@ -77,6 +98,7 @@ export class GamePage {
       
       this.originalWord = obj.results.original;
       this.originalWord = this.originalWord.replace(re, "İ").toUpperCase();
+      console.log(this.originalWord);
     }, error => {
       console.log(error.status);
     });
@@ -89,16 +111,27 @@ export class GamePage {
     this.inputWord += letter;
     this.indexes.push(index);
     if (this.inputWord == this.originalWord){
+      this.success();
+    } else if (this.inputWord.length == this.originalWord.length) {
+      this.failure();  
+    }
+  }
+
+  private success(){
+    this.animateSuccess = true;
+    setTimeout(() => {
       this.indexes = [];
       this.topUp(this.mobileNumber);
-      this.newWord(this.mobileNumber);
-    } else if (this.inputWord.length == this.originalWord.length) {
-      this.isNotCorrect();
-      for (let k = 0; k < this.originalWord.length; k++){
-        setTimeout(() => {
-          this.clear();
-        }, (50 * (k + 1)));
-      }
+      this.newWord(this.mobileNumber);  
+      this.animateSuccess = false;  
+    }, 300);
+  }
+
+  private failure(){
+    for (let k = 0; k < this.originalWord.length; k++){
+      setTimeout(() => {
+        this.clear();
+      }, (50 * (k + 1)));
     }
   }
 
@@ -137,8 +170,7 @@ export class GamePage {
     .subscribe(data => {
       let obj = JSON.parse(data.text());
       this.usrPoints = parseInt(obj.results.usrpoints);
-      this.isCorrect();      
-      console.log(this.usrPoints);
+      this.isCorrect();
     }, error => {
       console.log(error.status);
     });
@@ -153,17 +185,6 @@ export class GamePage {
       f.style.backgroundColor = '';
     }, 500);
   }
-
-  isNotCorrect() {
-    let toast = this.toastCtrl.create({
-      message: ':(',
-      duration: 1500,
-      position: 'top'
-    });
-  
-    //toast.present();
-  }
-
 
   presentConfirm() {
     let alert = this.alertCtrl.create({
