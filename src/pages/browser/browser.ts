@@ -1,5 +1,5 @@
-import { Component, createPlatformFactory } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -11,7 +11,13 @@ export class BrowserPage {
 
   u = 0;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public platform: Platform, public navParams: NavParams) {
     this.u = parseInt(this.navParams.get('src'));
+  }
+
+  ionViewWillEnter(){
+    this.platform.registerBackButtonAction(()=>{
+      this.navCtrl.pop();
+    });
   }
 }

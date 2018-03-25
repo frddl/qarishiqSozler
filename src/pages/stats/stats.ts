@@ -22,6 +22,10 @@ export class StatsPage {
     });
   }
 
+  ionViewWillEnter(){
+    this.requestStats(this.mobileNumber);
+  } 
+   
   requestStats(mobileNumber){
     var headers = new Headers();
     headers.append("Accept", 'application/json');
@@ -34,7 +38,7 @@ export class StatsPage {
       "msisdn" : "994" + mobileNumber.substr(1)
     };
 
-    this.http.post('/api', body, options)
+    this.http.post('http://4545.az/appapi/8112-1122/', body, options)
     .subscribe(data => {
       let obj = JSON.parse(data.text());
       this.usrPoints = obj.results.usrpoints;
@@ -42,9 +46,5 @@ export class StatsPage {
     }, error => {
       console.log(error.status);
     });
-
-    setTimeout(() => {
-      this.requestStats(mobileNumber);
-    }, 1000);
   }
 }

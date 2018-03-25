@@ -15,6 +15,7 @@ import { StatsPage } from '../pages/stats/stats';
 import { SmartAudio } from '../providers/smart-audio/smart-audio';
 import { NativeAudio } from '@ionic-native/native-audio';
 import { BrowserPage } from '../pages/browser/browser';
+import { GlobalProvider } from '../providers/global/global';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,9 @@ import { BrowserPage } from '../pages/browser/browser';
     FabContainer,
     NativeAudio,
     SmartAudio,
+    TabsPage,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    GlobalProvider,
   ] 
 })
 export class AppModule {}

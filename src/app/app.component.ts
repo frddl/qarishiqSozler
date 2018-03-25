@@ -21,8 +21,9 @@ export class MyApp {
     statusBar.styleBlackOpaque();
     
     platform.ready().then(() => {
+      splashScreen.hide();
+    
       storage.get('authorized').then((val) => {
-        splashScreen.hide();
         if (val == true) {
           this.rootPage = TabsPage;
         } else {

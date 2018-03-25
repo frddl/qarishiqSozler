@@ -5,6 +5,8 @@ import { Storage } from '@ionic/storage';
 import { Content } from 'ionic-angular';
 import swal from 'sweetalert2';
 import { SmartAudio } from '../../providers/smart-audio/smart-audio';
+import { TabsPage } from '../tabs/tabs';
+import { GlobalProvider } from '../../providers/global/global';
 
 @IonicPage()
 @Component({
@@ -29,11 +31,13 @@ export class GamePage {
 
   @ViewChild(Content) content: Content;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private storage: Storage, private smartAudio: SmartAudio, public alertCtrl: AlertController, public platform: Platform) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private storage: Storage, private smartAudio: SmartAudio, public alertCtrl: AlertController, public platform: Platform, public global: GlobalProvider) {
     storage.get("mobileNumber").then((val) => {
       this.requestStats(val);
       this.requestWord(val);
     });
+
+    console.log(this.global.isOpened());
   }
 
   requestStats(mobileNumber){
@@ -48,7 +52,7 @@ export class GamePage {
       "msisdn" : "994" + mobileNumber.substr(1)
     };
 
-    this.http.post('/api', body, options)
+    this.http.post('http://4545.az/appapi/8112-1122/', body, options)
     .subscribe(data => {
       let obj = JSON.parse(data.text());
       this.usrPoints = obj.results.usrpoints;
@@ -77,7 +81,7 @@ export class GamePage {
       "msisdn" : "994" + mobileNumber.substr(1)
     };
 
-    this.http.post('/api', body, options)
+    this.http.post('http://4545.az/appapi/8112-1122/', body, options)
     .subscribe(data => {
       let obj = JSON.parse(data.text());
       let msgText = obj.results.msg;
@@ -166,7 +170,7 @@ export class GamePage {
       "msisdn" : "994" + mobileNumber.substr(1)
     };
 
-    this.http.post('/api', body, options)
+    this.http.post('http://4545.az/appapi/8112-1122/', body, options)
     .subscribe(data => {
       let obj = JSON.parse(data.text());
       this.usrPoints = parseInt(obj.results.usrpoints);

@@ -1,6 +1,12 @@
 <ion-fab style="padding-right:6.2%; color:azure" bottom right #fab>
-  <button class="transparent-style" color="#000000" ion-fab mini></button>
+  <button class="transparent-style" color="#000000" ion-fab mini tap="fabToggled()"></button>
   <ion-fab-list side="top">
+    <button ion-fab (tap)="sound()">
+      <ion-icon *ngIf="soundOn" color="primary" name="volume-up"></ion-icon>
+      <ion-icon *ngIf="!soundOn" color="primary" name="volume-off"></ion-icon>
+      <ion-label *ngIf="soundOn">Səsli</ion-label>
+      <ion-label *ngIf="!soundOn">Səssiz</ion-label>
+    </button>
     <button ion-fab (tap)="popupContact()">
       <ion-icon color="primary" name="text"></ion-icon>
       <ion-label>Əlaqə</ion-label>
