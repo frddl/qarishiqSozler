@@ -34,14 +34,15 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
+  primary:     #B91226,
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222
 );
 
-$tabs-border-color-active: red;
+.tabs .indicator { background-color: #2AB736; }
+$fab-list-button-background-color: white;
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here

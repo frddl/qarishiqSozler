@@ -1,4 +1,15 @@
 page-game {
+    #inputBox {
+        color: #B91226;
+        font-size: 110%;
+        font-weight: bold;
+
+        input[disabled] {
+            color:#B91226 !important;
+            background: none !important;
+            opacity: 1 !important;
+        }
+    }
 
     .letters { 
         margin-left: 2%;
@@ -12,9 +23,11 @@ page-game {
         border-color: white; 
         background-color: white; 
         color: #B91226;
-        width: 8%;
+        width: 12%;
         margin-left: 1%;
         margin-right: 1%;
+        border-radius: 50%;
+        font-weight: bold;
     }
 
     .button.process {
@@ -23,6 +36,17 @@ page-game {
         background-color:#2AB736;
         padding: 5% 5%;
         margin: 2% 0;
+        display: inline-block;
+        border: 1px solid #2AB736;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .button.clear {
+        color: white;
+        width: 20%;
+        background-color:#2AB736;
+        margin: 1.25% 1.5%;
         display: inline-block;
         border: 1px solid #2AB736;
         border-radius: 4px;

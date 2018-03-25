@@ -3,8 +3,10 @@
 </ion-header>
 
 <ion-content class="has-header has-subheader" overflow-scroll="false" padding="true" text-center style="background-color:#B91226;">
+  <p class="white">Mobil nömrənizi daxil etməyiniz xahiş olunur. Sizə SMS ilə təsdiqləmə kodu göndəriləcək.</p>
   <ion-input type="tel" maxlength="10" [(ngModel)]="myNumber" focused placeholder="Mobil nömrənizi daxil edin" style="text-align: center"></ion-input>
   <div *ngIf="showSMSField">
+      <p class="white">SMS ilə aldığınız kodu daxil edin.</p>
       <ion-input type="tel" maxlength="4" [(ngModel)]="smsCode" required focused placeholder="SMS Kod" style="text-align: center"></ion-input>
   </div>
   <button class="white" *ngIf="!showSMSField" ion-button outline block (click)="validateNumber()">

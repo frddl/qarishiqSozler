@@ -1,6 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler, FabContainer } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { SuperTabsModule } from 'ionic2-super-tabs';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -11,8 +11,10 @@ import { IonDigitKeyboard } from '../components/ion-digit-keyboard/ion-digit-key
 import { IonicStorageModule } from '@ionic/storage';
 import { HttpModule } from '@angular/http';
 import { TabsPage } from '../pages/tabs/tabs';
-import { RulesPage } from '../pages/rules/rules';
 import { StatsPage } from '../pages/stats/stats';
+import { SmartAudio } from '../providers/smart-audio/smart-audio';
+import { NativeAudio } from '@ionic-native/native-audio';
+import { BrowserPage } from '../pages/browser/browser';
 
 @NgModule({
   declarations: [
@@ -20,8 +22,8 @@ import { StatsPage } from '../pages/stats/stats';
     WelcomePage,
     GamePage,
     TabsPage,
-    RulesPage,
-    StatsPage
+    StatsPage,
+    BrowserPage
   ],
   imports: [
     BrowserModule,
@@ -49,13 +51,16 @@ import { StatsPage } from '../pages/stats/stats';
     WelcomePage,
     GamePage,
     TabsPage,
-    RulesPage,
-    StatsPage
+    StatsPage,
+    BrowserPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    FabContainer,
+    NativeAudio,
+    SmartAudio,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
   ] 
 })
 export class AppModule {}

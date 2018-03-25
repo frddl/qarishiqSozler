@@ -5,20 +5,19 @@
 <ion-content style="background-color: #B91226;" padding="false" no-bounce text-center overflow-scroll="true">
   
   <div class="welcomeBlock">
+    <br>
     <ion-card item-height="100%">
-      <ion-item class="item-centered">
-        <ion-input type="text" disabled [(ngModel)]="inputWord" text-center></ion-input>
-      </ion-item>
-    </ion-card>
+      <ion-row>
+        <ion-input id="inputBox" type="text" disabled [(ngModel)]="inputWord" text-center>{{inputWord}}</ion-input>
+        <button class="clear" *ngIf="indexes.length > 0" ion-button outline block color="dark" (click)="clear()">SİL</button>
+      </ion-row>
+    </ion-card>  
 
     <br>
-    <ion-card>
-      
-    </ion-card>
     
-    <div class="row letters">
+    <ion-row class="letters" style="display: flex; justify-content: center;" align-items-center text-center>
       <button class="letter" id="{{i}}" ion-button outline block *ngFor="let letter of scrArr; let i = index" (click)="press(letter, i)">{{letter}}</button>
-    </div>
+    </ion-row>
     
     <ion-card>
       <p></p>
@@ -27,6 +26,9 @@
 
   <br>  
   
-  <button class="process" ion-button outline block color="dark" (click)="checkWord(inputWord)">Davam et</button>
-
+  <button class="process" ion-button outline block color="dark" (click)="newWord(mobileNumber)">NÖVBƏTİ SÖZ</button>
 </ion-content>
+
+<ion-footer id="points" text-center>
+  <p *ngIf="usrPoints > 0" style="color: white !important">{{usrPoints}} xal</p>
+</ion-footer>

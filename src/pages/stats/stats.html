@@ -1,19 +1,22 @@
-<ion-content padding style="text-align: center;">
+<ion-header>
+  <img src="assets/imgs/welcomeLogo.png" />
+</ion-header>
+<ion-content padding style="text-align: center; background: #B91226; ">
     <ion-card item-height="100%">
         <br>
         <ion-card-header style="text-align: center;">
-            Stats
+            Oyunun Statistikası
         </ion-card-header>
 
-        <ion-list style="align-content: center; align-items: center; padding-left: 15%">
+        <ion-list style="align-content: center; align-items: center;">
             <button ion-item>
                 <ion-icon name="md-checkmark-circle-outline" item-start></ion-icon>
-                True Answers - {{trueAnswers}}
+                Düzgün cavablar: {{trueAnswers}}
             </button>
             
             <button ion-item>
                 <ion-icon name="md-trophy" item-start></ion-icon>
-                User Points - {{usrPoints}}
+                Xallar - {{usrPoints}}
             </button>     
             
             <button ion-item>

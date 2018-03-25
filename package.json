@@ -21,6 +21,7 @@
     "@angular/platform-browser": "5.0.3",
     "@angular/platform-browser-dynamic": "5.0.3",
     "@ionic-native/core": "4.4.0",
+    "@ionic-native/native-audio": "^4.6.0",
     "@ionic-native/splash-screen": "4.4.0",
     "@ionic-native/sqlite": "^4.5.3",
     "@ionic-native/status-bar": "4.4.0",
@@ -29,6 +30,7 @@
     "cordova-plugin-device": "^2.0.1",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^1.1.16",
+    "cordova-plugin-nativeaudio": "^3.0.9",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.1",
     "cordova-plugin-whitelist": "^1.3.3",
@@ -36,8 +38,10 @@
     "ionic-angular": "3.9.2",
     "ionic2-super-tabs": "^4.2.2",
     "ionicons": "3.0.0",
+    "ng-material-floating-button": "^0.6.2",
     "rxjs": "5.5.2",
     "sw-toolbox": "3.6.0",
+    "sweetalert2": "^7.18.0",
     "zone.js": "0.8.18"
   },
   "devDependencies": {
@@ -53,7 +57,8 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-whitelist": {},
-      "cordova-plugin-splashscreen": {}
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-nativeaudio": {}
     },
     "platforms": [
       "android"
