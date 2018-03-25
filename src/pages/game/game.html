@@ -1,9 +1,8 @@
-<ion-header [ngClass]="{'shadowed' : global.isOpen }" >
+<ion-header [ngClass]="{'shadowed' : this.global.isOpen }" >
     <img src="assets/imgs/welcomeLogo.png" />
 </ion-header>
 
-
-<ion-content style="background-color: #B91226;" padding="false" no-bounce text-center overflow-scroll="true">
+<ion-content [ngClass]="{'shadowed' : this.global.isOpen }" style="background-color: #B91226;" padding="false" no-bounce text-center overflow-scroll="true">
   <div class="welcomeBlock">
     <ion-card *ngIf="usrPoints > 0" id="points" text-center>
       <br>

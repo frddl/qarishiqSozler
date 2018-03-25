@@ -18,7 +18,6 @@ export class TabsPage {
   gameRoot = GamePage;
   soundOn = true;
   pressedBack = false;
-  public isOpened: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage, public alertCtrl: AlertController , public platform: Platform , public fab: FabContainer, public smartAudio: SmartAudio, public global: GlobalProvider) {
     this.storage.get('sound').then((val) => {
@@ -31,11 +30,6 @@ export class TabsPage {
       if (!this.pressedBack)
         this.presentConfirm();
     });
-  }
-
-  public fabToggled(): void {
-    this.isOpened = !this.isOpened;
-    this.global.isOpen = this.isOpened;
   }
 
   presentConfirm() {
@@ -102,7 +96,12 @@ export class TabsPage {
     });
   }
   
+  public fabToggled(): void {
+    this.global.isOpen = !this.global.isOpen;
+  }
+
   close(fab: FabContainer){
     fab.close();
+    this.global.isOpen = false;
   }
 }

@@ -5,7 +5,6 @@ import { Storage } from '@ionic/storage';
 import { Content } from 'ionic-angular';
 import swal from 'sweetalert2';
 import { SmartAudio } from '../../providers/smart-audio/smart-audio';
-import { TabsPage } from '../tabs/tabs';
 import { GlobalProvider } from '../../providers/global/global';
 
 @IonicPage()
@@ -37,7 +36,9 @@ export class GamePage {
       this.requestWord(val);
     });
 
-    console.log(this.global.isOpened());
+    smartAudio.preload('coin', 'assets/audio/coin.mp3');
+    smartAudio.preload('press', 'assets/audio/build.mp3');
+    smartAudio.preload('clear', 'assets/audio/dig.mp3');
   }
 
   requestStats(mobileNumber){
@@ -62,6 +63,7 @@ export class GamePage {
   }
 
   private newWord(mobileNumber){
+    this.global.isOpen = true;
     this.scrArr = [];
     this.indexes = [];
     this.inputWord = '';

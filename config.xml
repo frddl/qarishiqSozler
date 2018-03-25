@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="simtoday.qarishiqsozler" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Qarışıq Sözlər</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author href="http://github.com/frddl/">Farid Mammadov</author>
+<widget id="simtoday.qarishiqsozler" version="1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Qarışıq Söz</name>
+    <description>"Qarışıq Söz" oyununa qoşul, həftəyə 1000, 500 və ya 250 AZN qazan!</description>
+    <author href="http://github.com/frddl/">Farid M.</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -20,10 +20,10 @@
     <preference name="android-minSdkVersion" value="16" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="SplashMaintainAspectRatio" value="true" />
-    <preference name="FadeSplashScreenDuration" value="300" />
+    <preference name="FadeSplashScreenDuration" value="0" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="SplashScreenDelay" value="10000" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
@@ -88,8 +88,6 @@
     <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
     <plugin name="cordova-sqlite-storage" spec="^2.2.1" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
-    <allow-navigation href="http://192.168.0.155:8100" />
-    <engine name="android" spec="7.0.0" />
     <plugin name="cordova-plugin-nativeaudio" spec="^3.0.9" />
-    <allow-navigation href="http://192.168.1.107:8100" />
+    <engine name="android" spec="7.0.0" />
 </widget>

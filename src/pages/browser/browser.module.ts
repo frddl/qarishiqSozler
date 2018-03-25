@@ -10,4 +10,5 @@ import { BrowserPage } from './browser';
     IonicPageModule.forChild(BrowserPage),
   ],
 })
+
 export class BrowserPageModule {}

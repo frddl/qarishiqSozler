@@ -25,6 +25,14 @@ export class StatsPage {
   ionViewWillEnter(){
     this.requestStats(this.mobileNumber);
   } 
+
+  ionViewDidEnter(){
+    this.requestStats(this.mobileNumber);
+  }
+
+  ionViewDidLoad(){
+    this.requestStats(this.mobileNumber);
+  }
    
   requestStats(mobileNumber){
     var headers = new Headers();
