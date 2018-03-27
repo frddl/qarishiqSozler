@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, AlertController, Platform } from '
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import { Content } from 'ionic-angular';
-import swal from 'sweetalert2';
 import { SmartAudio } from '../../providers/smart-audio/smart-audio';
 import { GlobalProvider } from '../../providers/global/global';
 import { NetworkProvider } from '../../providers/network/network';
@@ -32,7 +31,7 @@ export class GamePage {
 
   @ViewChild(Content) content: Content;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private storage: Storage, private smartAudio: SmartAudio, public alertCtrl: AlertController, public platform: Platform, public global: GlobalProvider, public network: NetworkProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, storage: Storage, private smartAudio: SmartAudio, public alertCtrl: AlertController, public platform: Platform, public global: GlobalProvider) {
     storage.get("mobileNumber").then((val) => {
       this.requestStats(val);
       this.requestWord(val);
@@ -43,6 +42,8 @@ export class GamePage {
     smartAudio.preload('clear', 'assets/audio/dig.mp3');
   }
 
+  /*
+  public network: NetworkProvider;
   ionViewDidEnter(){
     this.network.networkAlert.onWillDismiss(() => {
       if (this.originalWord == null){ 
@@ -51,6 +52,7 @@ export class GamePage {
       }
     });
   }
+  */
 
   requestStats(mobileNumber){
     var headers = new Headers();
@@ -64,7 +66,7 @@ export class GamePage {
       "msisdn" : "994" + mobileNumber.substr(1)
     };
 
-    this.http.post('/api', body, options)
+    this.http.post('http://4545.az/appapi/8112-1122/', body, options)
     .subscribe(data => {
       let obj = JSON.parse(data.text());
       this.usrPoints = obj.results.usrpoints;
@@ -93,7 +95,7 @@ export class GamePage {
       "msisdn" : "994" + mobileNumber.substr(1)
     };
 
-    this.http.post('/api', body, options)
+    this.http.post('http://4545.az/appapi/8112-1122/', body, options)
     .subscribe(data => {
       let obj = JSON.parse(data.text());
       let msgText = obj.results.msg;
@@ -160,14 +162,21 @@ export class GamePage {
   }
 
   private errorMsg(msgText){
-    swal({
-      title: 'Xəta!',
-      text: msgText,
-      type: 'info',
-      showConfirmButton: false
-    }).then((result) => {
-        this.newWord(this.mobileNumber);
-    })
+    let alert = this.alertCtrl.create({
+      title: 'Qarışıq Söz',
+      message: msgText,
+      buttons: [
+        {
+          text: 'Oldu',
+          handler: () => {
+            this.platform.exitApp();
+          }
+        }
+      ]
+    });
+    
+    alert.onWillDismiss(() => this.requestWord(this.mobileNumber));
+    alert.present();
   }
 
   private topUp(mobileNumber){
@@ -182,7 +191,7 @@ export class GamePage {
       "msisdn" : "994" + mobileNumber.substr(1)
     };
 
-    this.http.post('/api', body, options)
+    this.http.post('http://4545.az/appapi/8112-1122/', body, options)
     .subscribe(data => {
       let obj = JSON.parse(data.text());
       this.usrPoints = parseInt(obj.results.usrpoints);

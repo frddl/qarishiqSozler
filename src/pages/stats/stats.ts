@@ -15,7 +15,7 @@ export class StatsPage {
   private usrPoints = '';
   private mobileNumber = '';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private storage: Storage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, storage: Storage) {
     storage.get('mobileNumber').then((val) => {
       this.requestStats(val);
       this.mobileNumber = val;

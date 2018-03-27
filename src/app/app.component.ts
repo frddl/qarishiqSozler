@@ -3,8 +3,8 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { WelcomePage } from '../pages/welcome/welcome';
-import { Storage } from '@ionic/storage';
 import { TabsPage } from '../pages/tabs/tabs';
+import { Storage } from '@ionic/storage';
 import { NetworkProvider } from '../providers/network/network';
 
 @Component({
@@ -26,6 +26,7 @@ export class MyApp {
           this.rootPage = WelcomePage;
         }
 
+        this.rootPage = WelcomePage;
         splashScreen.hide();
       });
     });
