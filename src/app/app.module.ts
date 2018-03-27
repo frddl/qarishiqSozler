@@ -16,6 +16,8 @@ import { SmartAudio } from '../providers/smart-audio/smart-audio';
 import { NativeAudio } from '@ionic-native/native-audio';
 import { BrowserPage } from '../pages/browser/browser';
 import { GlobalProvider } from '../providers/global/global';
+import { Network } from '@ionic-native/network';
+import { NetworkProvider } from '../providers/network/network';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,8 @@ import { GlobalProvider } from '../providers/global/global';
     TabsPage,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     GlobalProvider,
+    Network,
+    NetworkProvider,
   ] 
 })
 export class AppModule {}

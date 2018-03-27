@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="simtoday.qarishiqsozler" version="1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="simtoday.qarishiqsozler" version="1.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Qarışıq Söz</name>
     <description>"Qarışıq Söz" oyununa qoşul, həftəyə 1000, 500 və ya 250 AZN qazan!</description>
     <author href="http://github.com/frddl/">Farid M.</author>
@@ -16,6 +16,7 @@
     <allow-navigation href="data:*" />
     <allow-navigation href="http://4545.az/*" />
     <allow-navitation href="/api" />
+    <preference name="loadUrlTimeoutValue" value="100000" />
     <preference name="ScrollEnabled" value="false" />
     <preference name="android-minSdkVersion" value="16" />
     <preference name="BackupWebStorage" value="none" />
@@ -89,5 +90,7 @@
     <plugin name="cordova-sqlite-storage" spec="^2.2.1" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <plugin name="cordova-plugin-nativeaudio" spec="^3.0.9" />
+    <allow-navigation href="http://192.168.0.156:8100" />
     <engine name="android" spec="7.0.0" />
+    <plugin name="cordova-plugin-network-information" spec="^2.0.1" />
 </widget>

@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { Storage } from '@ionic/storage';
 import { TabsPage } from '../pages/tabs/tabs';
+import { NetworkProvider } from '../providers/network/network';
 
 @Component({
   templateUrl: 'app.html'
@@ -13,9 +14,10 @@ import { TabsPage } from '../pages/tabs/tabs';
 export class MyApp {
   rootPage:any ;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, storage : Storage) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, storage : Storage, public network: NetworkProvider) {
     statusBar.backgroundColorByHexString("#000000");
-    
+    network.detectNetwork();
+
     platform.ready().then(() => {
       storage.get('authorized').then((val) => {
         if (val == true) {
@@ -23,6 +25,7 @@ export class MyApp {
         } else {
           this.rootPage = WelcomePage;
         }
+
         splashScreen.hide();
       });
     });

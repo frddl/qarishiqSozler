@@ -6,6 +6,7 @@ import { Content } from 'ionic-angular';
 import swal from 'sweetalert2';
 import { SmartAudio } from '../../providers/smart-audio/smart-audio';
 import { GlobalProvider } from '../../providers/global/global';
+import { NetworkProvider } from '../../providers/network/network';
 
 @IonicPage()
 @Component({
@@ -16,13 +17,14 @@ import { GlobalProvider } from '../../providers/global/global';
 export class GamePage {
 
   mobileNumber = '';
+  public originalWord: string;
+  oriArr = [];
   scrambledWord = '';
   scrArr = [];
-  oriArr = [];
-  originalWord: string;
-  msg = '';
+  
   inputWord = '';
   indexes = [];
+  
   usrPoints = 0;
   animateSuccess = false;
 
@@ -30,7 +32,7 @@ export class GamePage {
 
   @ViewChild(Content) content: Content;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private storage: Storage, private smartAudio: SmartAudio, public alertCtrl: AlertController, public platform: Platform, public global: GlobalProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private storage: Storage, private smartAudio: SmartAudio, public alertCtrl: AlertController, public platform: Platform, public global: GlobalProvider, public network: NetworkProvider) {
     storage.get("mobileNumber").then((val) => {
       this.requestStats(val);
       this.requestWord(val);
@@ -39,6 +41,15 @@ export class GamePage {
     smartAudio.preload('coin', 'assets/audio/coin.mp3');
     smartAudio.preload('press', 'assets/audio/build.mp3');
     smartAudio.preload('clear', 'assets/audio/dig.mp3');
+  }
+
+  ionViewDidEnter(){
+    this.network.networkAlert.onWillDismiss(() => {
+      if (this.originalWord == null){ 
+        this.newWord(this.mobileNumber);
+        this.requestStats(this.mobileNumber);
+      }
+    });
   }
 
   requestStats(mobileNumber){
@@ -53,7 +64,7 @@ export class GamePage {
       "msisdn" : "994" + mobileNumber.substr(1)
     };
 
-    this.http.post('http://4545.az/appapi/8112-1122/', body, options)
+    this.http.post('/api', body, options)
     .subscribe(data => {
       let obj = JSON.parse(data.text());
       this.usrPoints = obj.results.usrpoints;
@@ -62,8 +73,7 @@ export class GamePage {
     });
   }
 
-  private newWord(mobileNumber){
-    this.global.isOpen = true;
+  public newWord(mobileNumber){
     this.scrArr = [];
     this.indexes = [];
     this.inputWord = '';
@@ -83,7 +93,7 @@ export class GamePage {
       "msisdn" : "994" + mobileNumber.substr(1)
     };
 
-    this.http.post('http://4545.az/appapi/8112-1122/', body, options)
+    this.http.post('/api', body, options)
     .subscribe(data => {
       let obj = JSON.parse(data.text());
       let msgText = obj.results.msg;
@@ -104,7 +114,6 @@ export class GamePage {
       
       this.originalWord = obj.results.original;
       this.originalWord = this.originalWord.replace(re, "İ").toUpperCase();
-      console.log(this.originalWord);
     }, error => {
       console.log(error.status);
     });
@@ -128,7 +137,8 @@ export class GamePage {
     setTimeout(() => {
       this.indexes = [];
       this.topUp(this.mobileNumber);
-      this.newWord(this.mobileNumber);  
+      this.newWord(this.mobileNumber);
+      this.isCorrect();  
       this.animateSuccess = false;  
     }, 300);
   }
@@ -172,11 +182,10 @@ export class GamePage {
       "msisdn" : "994" + mobileNumber.substr(1)
     };
 
-    this.http.post('http://4545.az/appapi/8112-1122/', body, options)
+    this.http.post('/api', body, options)
     .subscribe(data => {
       let obj = JSON.parse(data.text());
       this.usrPoints = parseInt(obj.results.usrpoints);
-      this.isCorrect();
     }, error => {
       console.log(error.status);
     });

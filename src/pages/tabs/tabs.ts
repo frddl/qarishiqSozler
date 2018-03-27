@@ -102,6 +102,6 @@ export class TabsPage {
 
   close(fab: FabContainer){
     fab.close();
-    this.global.isOpen = false;
+    if (this.global.isOpen) this.global.isOpen = false;
   }
 }
