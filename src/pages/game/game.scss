@@ -1,4 +1,12 @@
 page-game {
+    ion-spinner * {
+        padding-right: 100%;
+        width: 200%;
+        height: 200%;
+        stroke: #ffffff !important;
+        fill: #ffffff !important;
+      }
+
     #inputBox {
         color: #B91226;
         font-size: 110%;

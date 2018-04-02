@@ -5,47 +5,38 @@ import { AlertController } from 'ionic-angular';
 @Injectable()
 export class NetworkProvider {
 
-  isConnected = true;
-  private networkAlert: any;
-  private deviceNetworkStatus = true;
-  public alertPresented: any;
+  public networkAlert = this.alertCtrl.create();
+  public previousStatus: any;
+  firstTime = false;
 
   constructor(public network: Network, public alertCtrl: AlertController) {
-    this.alertPresented = false;
-    //this.deviceNetworkStatus = navigator.onLine;
-    //this.checkNetwork(this.deviceNetworkStatus);
   }
 
   detectNetwork(){
     this.network.onConnect().subscribe(data => {    
-      if (!this.isConnected || !this.deviceNetworkStatus){
-        this.deviceNetworkStatus = true;
+      if (!this.firstTime && this.previousStatus == 0){
         this.networkAlert.dismiss();
       }
-
-      this.isConnected = true;
+      
+      this.previousStatus = 1;
     }, error => console.error(error));
    
     this.network.onDisconnect().subscribe(data => {
-      this.isConnected = false;
-      this.checkNetwork(this.isConnected);
+      if (this.previousStatus == 1 || this.previousStatus == null){
+        this.checkNetwork();
+      }
+
+      this.previousStatus = 0;
     }, error => console.error(error));
   }
 
-  checkNetwork(state){
-    if (!state || !this.deviceNetworkStatus){
-      let v = this;
-      if (!v.alertPresented){
-        this.networkAlert = this.alertCtrl.create({
-          title: 'Qarışıq Söz',
-          message: 'Davam etmək üçün internet bağlantınızın aktiv olduğuna əmin olun.' + this,
-        })
-        this.networkAlert.onWillDismiss(() => {
-          this.checkNetwork(this.isConnected && this.deviceNetworkStatus);
-          v.alertPresented = false;
-        });
-        this.networkAlert.present();
-      }
-    }
+  checkNetwork(){
+      this.networkAlert = this.alertCtrl.create({
+        title: 'Qarışıq Söz',
+        message: 'Davam etmək üçün internet bağlantınızın aktiv olduğuna əmin olun.',
+        enableBackdropDismiss: false
+      })
+
+      this.networkAlert.present();
   }
 }

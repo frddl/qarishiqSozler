@@ -22,6 +22,7 @@
 
     <br>
     
+    <div *ngIf="this.scrArr.length == 0"><ion-spinner name="dots"></ion-spinner><br></div>
     <ion-row class="letters" style="display: flex; justify-content: center;" align-items-center text-center>
       <button class="letter" id="{{i}}" ion-button outline block *ngFor="let letter of scrArr; let i = index" (click)="press(letter, i)">{{letter}}</button>
     </ion-row>
@@ -33,5 +34,5 @@
 
   <br>  
   
-  <button class="process" ion-button outline block color="dark" (click)="newWord(mobileNumber)">NÖVBƏTİ SÖZ</button>
+  <button *ngIf="this.scrArr.length > 0" class="process" ion-button outline block color="dark" (click)="newWord(mobileNumber)">NÖVBƏTİ SÖZ</button>
 </ion-content>

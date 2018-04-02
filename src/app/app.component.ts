@@ -14,7 +14,7 @@ import { NetworkProvider } from '../providers/network/network';
 export class MyApp {
   rootPage:any ;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, storage : Storage, public network: NetworkProvider) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, storage : Storage, network: NetworkProvider) {
     statusBar.backgroundColorByHexString("#000000");
     network.detectNetwork();
 
@@ -25,8 +25,7 @@ export class MyApp {
         } else {
           this.rootPage = WelcomePage;
         }
-
-        this.rootPage = WelcomePage;
+        
         splashScreen.hide();
       });
     });

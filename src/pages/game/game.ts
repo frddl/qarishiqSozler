@@ -31,28 +31,23 @@ export class GamePage {
 
   @ViewChild(Content) content: Content;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, storage: Storage, private smartAudio: SmartAudio, public alertCtrl: AlertController, public platform: Platform, public global: GlobalProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, storage: Storage, private smartAudio: SmartAudio, public alertCtrl: AlertController, public platform: Platform, public global: GlobalProvider, public network: NetworkProvider) {
     storage.get("mobileNumber").then((val) => {
       this.requestStats(val);
       this.requestWord(val);
     });
 
-    smartAudio.preload('coin', 'assets/audio/coin.mp3');
-    smartAudio.preload('press', 'assets/audio/build.mp3');
-    smartAudio.preload('clear', 'assets/audio/dig.mp3');
-  }
-
-  /*
-  public network: NetworkProvider;
-  ionViewDidEnter(){
     this.network.networkAlert.onWillDismiss(() => {
       if (this.originalWord == null){ 
         this.newWord(this.mobileNumber);
         this.requestStats(this.mobileNumber);
       }
     });
+
+    smartAudio.preload('coin', 'assets/audio/coin.mp3');
+    smartAudio.preload('press', 'assets/audio/build.mp3');
+    smartAudio.preload('clear', 'assets/audio/dig.mp3');
   }
-  */
 
   requestStats(mobileNumber){
     var headers = new Headers();
